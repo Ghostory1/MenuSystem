@@ -12,13 +12,15 @@
 #include "InputActionValue.h"
 #include "OnlineSubsystem.h"
 #include "Interfaces/OnlineSessionInterface.h"
+#include "OnlineSessionSettings.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
 //////////////////////////////////////////////////////////////////////////
 // AMenuSystemCharacter
 
-AMenuSystemCharacter::AMenuSystemCharacter()
+AMenuSystemCharacter::AMenuSystemCharacter():
+	CreateSessionCompleteDelegate(FOnCreateSessionCompleteDelegate::CreateUObject(this, &ThisClass::OnCreateSessionComplete))
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
@@ -84,6 +86,60 @@ void AMenuSystemCharacter::BeginPlay()
 		{
 			Subsystem->AddMappingContext(DefaultMappingContext, 0);
 		}
+	}
+}
+
+void AMenuSystemCharacter::CreateGameSession()
+{
+	// Called when pressing the 1 key
+	if (!OnlineSessionInterface.IsValid())
+	{
+		return;
+	}
+	auto ExistingSession = OnlineSessionInterface->GetNamedSession(NAME_GameSession);
+	if (ExistingSession != nullptr)
+	{
+		OnlineSessionInterface->DestroySession(NAME_GameSession);
+	}
+
+	OnlineSessionInterface->AddOnCreateSessionCompleteDelegate_Handle(CreateSessionCompleteDelegate);
+	TSharedPtr<FOnlineSessionSettings> SessionSettings = MakeShareable(new FOnlineSessionSettings());
+	SessionSettings->bIsLANMatch = false; // lan 연결말고 인터넷연결할거라 false
+	SessionSettings->NumPublicConnections = 4; //최대 4명까지 멀티게임
+	SessionSettings->bAllowJoinInProgress = true; // 세션이 실행중이면 다른 유저도 가입할수 있음
+	SessionSettings->bAllowJoinViaPresence = true; //스팀이 게임 세션을 설정할때 프리센스를 사용함
+	SessionSettings->bShouldAdvertise = true; // 광고해서 사람들이 들어올수있게 해야함
+	SessionSettings->bUsesPresence = true; // 현재 지역에서 진행중인 세션 찾기위해 true
+	const ULocalPlayer* LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController();
+	OnlineSessionInterface->CreateSession(*LocalPlayer->GetPreferredUniqueNetId(), NAME_GameSession, *SessionSettings);
+}
+
+void AMenuSystemCharacter::OnCreateSessionComplete(FName SessionName, bool bWasSuccessful)
+{
+	if (bWasSuccessful)
+	{
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(
+				-1,
+				15.f,
+				FColor::Blue,
+				FString::Printf(TEXT("Created session : %s"), *SessionName.ToString())
+			);
+		}
+	}
+	else
+	{
+		if (GEngine)
+		{
+			GEngine->AddOnScreenDebugMessage(
+				-1,
+				15.f,
+				FColor::Red,
+				FString::Printf(TEXT("Failed to create session!"))
+			);
+		}
+		
 	}
 }
 
