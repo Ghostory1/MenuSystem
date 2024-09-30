@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\unreal projects\\menusystem\\plugins\\mutiplayersessions\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\mutiplayersessions\\module.mutiplayersessions.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\unreal projects\\menusystem\\intermediate\\build\\win64\\x64\\menusystemeditor\\development\\engine\\sharedpch.engine.cpp20.h.pch",
+        "Includes": [
+            "f:\\unreal projects\\menusystem\\plugins\\mutiplayersessions\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\mutiplayersessions\\definitions.mutiplayersessions.h",
+            "f:\\unreal projects\\menusystem\\plugins\\mutiplayersessions\\source\\mutiplayersessions\\private\\mutiplayersessions.cpp",
+            "f:\\unreal projects\\menusystem\\plugins\\mutiplayersessions\\source\\mutiplayersessions\\public\\mutiplayersessions.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
