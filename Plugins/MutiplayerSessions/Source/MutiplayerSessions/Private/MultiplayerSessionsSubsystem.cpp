@@ -54,6 +54,9 @@ void UMultiplayerSessionsSubsystem::CreateSession(int32 NumPublicConnections, FS
 	{
 		//세션생성에 실패하면 델리게이트 리스트에서 핸들러 삭제
 		SessionInterface->ClearOnCreateSessionCompleteDelegate_Handle(CreateSessionCompleteDelegateHandle);
+
+		//BroadCast our own custom delegate
+		MultiplayerOnCreateSessionComplete.Broadcast(false);
 	}
 		
 		
@@ -77,6 +80,13 @@ void UMultiplayerSessionsSubsystem::StartSession()
 
 void UMultiplayerSessionsSubsystem::OnCretateSessionComplete(FName SessionName, bool bWasSuccessful)
 {
+	// 1. 세션이 생성 완료된 상황
+	if (SessionInterface)
+	{
+		SessionInterface->ClearOnCreateSessionCompleteDelegate_Handle(CreateSessionCompleteDelegateHandle);
+	}
+	//Broadcast가 성공적이면 bWasSuccessful에 true 값을 받아옴
+	MultiplayerOnCreateSessionComplete.Broadcast(bWasSuccessful);
 }
 
 void UMultiplayerSessionsSubsystem::OnFindSessionComplete(bool bWasSuccessful)

@@ -23,6 +23,12 @@ protected:
 	//이 레벨이 없어질때 호출되는 함수
 	virtual void NativeDestruct() override;
 
+	// MultiplayerSessionSubsystem.h 에 선언된 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMultiplayerOnCreateSessionComplete, bool, bWasSuccessful)에 대한 콜백함수
+	// Callbacks for the custom delegates on the MultiplayerSessionsSubsystem
+	//
+	UFUNCTION()
+	void OnCreateSession(bool bWasSuccessful);
+
 private:
 	//UPROPERTY(meta = (BindWidget))를 쓰려면 WBP_Menu에 버튼이름과 변수명하고 같아야함
 	UPROPERTY(meta = (BindWidget))
