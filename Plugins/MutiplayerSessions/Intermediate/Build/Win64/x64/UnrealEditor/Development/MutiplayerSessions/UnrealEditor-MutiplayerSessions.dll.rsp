@@ -42,6 +42,8 @@
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\Slate\UnrealEditor-Slate.lib"
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\SlateCore\UnrealEditor-SlateCore.lib"
 "..\Intermediate\Build\Win64\x64\UnrealEditor\Development\Core\UnrealEditor-Core.lib"
+"..\Plugins\Online\OnlineSubsystem\Intermediate\Build\Win64\x64\UnrealEditor\Development\OnlineSubsystem\UnrealEditor-OnlineSubsystem.lib"
+"..\Plugins\Online\OnlineSubsystemSteam\Intermediate\Build\Win64\x64\UnrealEditor\Development\OnlineSubsystemSteam\UnrealEditor-OnlineSubsystemSteam.lib"
 "delayimp.lib"
 "wininet.lib"
 "rpcrt4.lib"
