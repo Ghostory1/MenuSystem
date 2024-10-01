@@ -257,6 +257,7 @@
 /I "Developer\PhysicsUtilities\Public"
 /I "..\Intermediate\Build\Win64\UnrealEditor\Inc\WidgetRegistration\UHT"
 /I "Developer\WidgetRegistration\Public"
+/I "F:\Unreal Projects\MenuSystem\Plugins\MutiplayerSessions\Intermediate\Build\Win64\UnrealEditor\Inc\MutiplayerSessions\UHT"
 /I "F:\Unreal Projects\MenuSystem\Plugins\MutiplayerSessions\Source"
 /I "F:\Unreal Projects\MenuSystem\Plugins\MutiplayerSessions\Source\MutiplayerSessions\Public"
 /I "..\Plugins\Online\OnlineSubsystem\Intermediate\Build\Win64\UnrealEditor\Inc\OnlineSubsystem\UHT"
