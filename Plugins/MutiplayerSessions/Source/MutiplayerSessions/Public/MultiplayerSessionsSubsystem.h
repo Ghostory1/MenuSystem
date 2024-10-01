@@ -39,6 +39,10 @@ protected:
 private:
 	//서브시스템을 바깥에서 접근하지않아도 되니 private
 	IOnlineSessionPtr SessionInterface;
+
+	//CreateSession에서 세팅값 저장
+	TSharedPtr<FOnlineSessionSettings> LastSessionSettings;
+
 	//델리게이트 리스트
 	// We will bind our MultiplayerSessionSubsystem internal callbacks to these
 	FOnCreateSessionCompleteDelegate CreateSessionCompletedDelegate;
