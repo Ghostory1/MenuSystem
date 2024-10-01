@@ -29,6 +29,22 @@ void EmptyLinkFunctionForGeneratedCodeMenu() {}
 		P_THIS->HostButtonClicked();
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(UMenu::execOnStartSession)
+	{
+		P_GET_UBOOL(Z_Param_bWasSuccessful);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OnStartSession(Z_Param_bWasSuccessful);
+		P_NATIVE_END;
+	}
+	DEFINE_FUNCTION(UMenu::execOnDestroySession)
+	{
+		P_GET_UBOOL(Z_Param_bWasSuccessful);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->OnDestroySession(Z_Param_bWasSuccessful);
+		P_NATIVE_END;
+	}
 	DEFINE_FUNCTION(UMenu::execOnCreateSession)
 	{
 		P_GET_UBOOL(Z_Param_bWasSuccessful);
@@ -54,6 +70,8 @@ void EmptyLinkFunctionForGeneratedCodeMenu() {}
 			{ "JoinButtonClicked", &UMenu::execJoinButtonClicked },
 			{ "MenuSetup", &UMenu::execMenuSetup },
 			{ "OnCreateSession", &UMenu::execOnCreateSession },
+			{ "OnDestroySession", &UMenu::execOnDestroySession },
+			{ "OnStartSession", &UMenu::execOnStartSession },
 		};
 		FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 	}
@@ -166,11 +184,11 @@ void EmptyLinkFunctionForGeneratedCodeMenu() {}
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UMenu_OnCreateSession_Statics::Function_MetaDataParams[] = {
 #if !UE_BUILD_SHIPPING
-		{ "Comment", "// MultiplayerSessionSubsystem.h \xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMultiplayerOnCreateSessionComplete, bool, bWasSuccessful)\xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xdd\xb9\xef\xbf\xbd\xef\xbf\xbd\xd4\xbc\xef\xbf\xbd\n// Callbacks for the custom delegates on the MultiplayerSessionsSubsystem\n//\n" },
+		{ "Comment", "// MultiplayerSessionSubsystem.h \xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMultiplayerOnCreateSessionComplete, bool, bWasSuccessful)\xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xdd\xb9\xef\xbf\xbd\xef\xbf\xbd\xd4\xbc\xef\xbf\xbd\n// Callbacks for the custom delegates on the MultiplayerSessionsSubsystem\n// \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xc6\xae\xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xd2\x8b\xef\xbf\xbd DYNAMIC\xef\xbf\xbd\xce\xb0\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xce\xbf\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xce\xbd\xef\xbf\xbd UFUNCTION \xef\xbf\xbd\xef\xbf\xbd\xc5\xa9\xef\xbf\xbd\xce\xb8\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\n//\n" },
 #endif
 		{ "ModuleRelativePath", "Public/Menu.h" },
 #if !UE_BUILD_SHIPPING
-		{ "ToolTip", "MultiplayerSessionSubsystem.h \xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMultiplayerOnCreateSessionComplete, bool, bWasSuccessful)\xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xdd\xb9\xef\xbf\xbd\xef\xbf\xbd\xd4\xbc\xef\xbf\xbd\nCallbacks for the custom delegates on the MultiplayerSessionsSubsystem" },
+		{ "ToolTip", "MultiplayerSessionSubsystem.h \xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMultiplayerOnCreateSessionComplete, bool, bWasSuccessful)\xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xdd\xb9\xef\xbf\xbd\xef\xbf\xbd\xd4\xbc\xef\xbf\xbd\nCallbacks for the custom delegates on the MultiplayerSessionsSubsystem\n\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xc6\xae\xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xd2\x8b\xef\xbf\xbd DYNAMIC\xef\xbf\xbd\xce\xb0\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xce\xbf\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd\xce\xbd\xef\xbf\xbd UFUNCTION \xef\xbf\xbd\xef\xbf\xbd\xc5\xa9\xef\xbf\xbd\xce\xb8\xef\xbf\xbd \xef\xbf\xbd\xef\xbf\xbd\xef\xbf\xbd" },
 #endif
 	};
 #endif
@@ -183,6 +201,84 @@ void EmptyLinkFunctionForGeneratedCodeMenu() {}
 		if (!ReturnFunction)
 		{
 			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UMenu_OnCreateSession_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UMenu_OnDestroySession_Statics
+	{
+		struct Menu_eventOnDestroySession_Parms
+		{
+			bool bWasSuccessful;
+		};
+		static void NewProp_bWasSuccessful_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bWasSuccessful;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_UMenu_OnDestroySession_Statics::NewProp_bWasSuccessful_SetBit(void* Obj)
+	{
+		((Menu_eventOnDestroySession_Parms*)Obj)->bWasSuccessful = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UMenu_OnDestroySession_Statics::NewProp_bWasSuccessful = { "bWasSuccessful", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(Menu_eventOnDestroySession_Parms), &Z_Construct_UFunction_UMenu_OnDestroySession_Statics::NewProp_bWasSuccessful_SetBit, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UMenu_OnDestroySession_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UMenu_OnDestroySession_Statics::NewProp_bWasSuccessful,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UMenu_OnDestroySession_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Menu.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UMenu_OnDestroySession_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UMenu, nullptr, "OnDestroySession", nullptr, nullptr, Z_Construct_UFunction_UMenu_OnDestroySession_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UMenu_OnDestroySession_Statics::PropPointers), sizeof(Z_Construct_UFunction_UMenu_OnDestroySession_Statics::Menu_eventOnDestroySession_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UMenu_OnDestroySession_Statics::Function_MetaDataParams), Z_Construct_UFunction_UMenu_OnDestroySession_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UMenu_OnDestroySession_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_UMenu_OnDestroySession_Statics::Menu_eventOnDestroySession_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_UMenu_OnDestroySession()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UMenu_OnDestroySession_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
+	struct Z_Construct_UFunction_UMenu_OnStartSession_Statics
+	{
+		struct Menu_eventOnStartSession_Parms
+		{
+			bool bWasSuccessful;
+		};
+		static void NewProp_bWasSuccessful_SetBit(void* Obj);
+		static const UECodeGen_Private::FBoolPropertyParams NewProp_bWasSuccessful;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	void Z_Construct_UFunction_UMenu_OnStartSession_Statics::NewProp_bWasSuccessful_SetBit(void* Obj)
+	{
+		((Menu_eventOnStartSession_Parms*)Obj)->bWasSuccessful = 1;
+	}
+	const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_UMenu_OnStartSession_Statics::NewProp_bWasSuccessful = { "bWasSuccessful", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(Menu_eventOnStartSession_Parms), &Z_Construct_UFunction_UMenu_OnStartSession_Statics::NewProp_bWasSuccessful_SetBit, METADATA_PARAMS(0, nullptr) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_UMenu_OnStartSession_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_UMenu_OnStartSession_Statics::NewProp_bWasSuccessful,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_UMenu_OnStartSession_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Menu.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_UMenu_OnStartSession_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_UMenu, nullptr, "OnStartSession", nullptr, nullptr, Z_Construct_UFunction_UMenu_OnStartSession_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_UMenu_OnStartSession_Statics::PropPointers), sizeof(Z_Construct_UFunction_UMenu_OnStartSession_Statics::Menu_eventOnStartSession_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x00080401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_UMenu_OnStartSession_Statics::Function_MetaDataParams), Z_Construct_UFunction_UMenu_OnStartSession_Statics::Function_MetaDataParams) };
+	static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_UMenu_OnStartSession_Statics::PropPointers) < 2048);
+	static_assert(sizeof(Z_Construct_UFunction_UMenu_OnStartSession_Statics::Menu_eventOnStartSession_Parms) < MAX_uint16);
+	UFunction* Z_Construct_UFunction_UMenu_OnStartSession()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_UMenu_OnStartSession_Statics::FuncParams);
 		}
 		return ReturnFunction;
 	}
@@ -219,7 +315,9 @@ void EmptyLinkFunctionForGeneratedCodeMenu() {}
 		{ &Z_Construct_UFunction_UMenu_HostButtonClicked, "HostButtonClicked" }, // 475533292
 		{ &Z_Construct_UFunction_UMenu_JoinButtonClicked, "JoinButtonClicked" }, // 2772536340
 		{ &Z_Construct_UFunction_UMenu_MenuSetup, "MenuSetup" }, // 1196326147
-		{ &Z_Construct_UFunction_UMenu_OnCreateSession, "OnCreateSession" }, // 2421333179
+		{ &Z_Construct_UFunction_UMenu_OnCreateSession, "OnCreateSession" }, // 1658251524
+		{ &Z_Construct_UFunction_UMenu_OnDestroySession, "OnDestroySession" }, // 1057662063
+		{ &Z_Construct_UFunction_UMenu_OnStartSession, "OnStartSession" }, // 4182957006
 	};
 	static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UMenu_Statics::FuncInfo) < 2048);
 #if WITH_METADATA
@@ -296,9 +394,9 @@ void EmptyLinkFunctionForGeneratedCodeMenu() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MenuSystem_Plugins_MutiplayerSessions_Source_MutiplayerSessions_Public_Menu_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_UMenu, UMenu::StaticClass, TEXT("UMenu"), &Z_Registration_Info_UClass_UMenu, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMenu), 4122297612U) },
+		{ Z_Construct_UClass_UMenu, UMenu::StaticClass, TEXT("UMenu"), &Z_Registration_Info_UClass_UMenu, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UMenu), 208948568U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MenuSystem_Plugins_MutiplayerSessions_Source_MutiplayerSessions_Public_Menu_h_72443457(TEXT("/Script/MutiplayerSessions"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MenuSystem_Plugins_MutiplayerSessions_Source_MutiplayerSessions_Public_Menu_h_310906785(TEXT("/Script/MutiplayerSessions"),
 		Z_CompiledInDeferFile_FID_MenuSystem_Plugins_MutiplayerSessions_Source_MutiplayerSessions_Public_Menu_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MenuSystem_Plugins_MutiplayerSessions_Source_MutiplayerSessions_Public_Menu_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

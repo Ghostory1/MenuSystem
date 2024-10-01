@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Interfaces/OnlineSessionInterface.h"
 #include "Menu.generated.h"
 
 /**
@@ -25,10 +26,16 @@ protected:
 
 	// MultiplayerSessionSubsystem.h 에 선언된 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FMultiplayerOnCreateSessionComplete, bool, bWasSuccessful)에 대한 콜백함수
 	// Callbacks for the custom delegates on the MultiplayerSessionsSubsystem
+	// 델리게이트를 선언할떄 DYNAMIC인것은 새로운 기능으로써 UFUNCTION 매크로를 사용
 	//
 	UFUNCTION()
 	void OnCreateSession(bool bWasSuccessful);
-
+	void OnFindSession(const TArray<FOnlineSessionSearchResult>& SessionResults, bool bWasSuccessful);
+	void OnJoinSession(EOnJoinSessionCompleteResult::Type Result);
+	UFUNCTION()
+	void OnDestroySession(bool bWasSuccessful);
+	UFUNCTION()
+	void OnStartSession(bool bWasSuccessful);
 private:
 	//UPROPERTY(meta = (BindWidget))를 쓰려면 WBP_Menu에 버튼이름과 변수명하고 같아야함
 	UPROPERTY(meta = (BindWidget))
