@@ -63,6 +63,7 @@ private:
 
 	//CreateSession에서 세팅값 저장
 	TSharedPtr<FOnlineSessionSettings> LastSessionSettings;
+	TSharedPtr<FOnlineSessionSearch> LastSessionSearch;
 
 	//델리게이트 리스트
 	// We will bind our MultiplayerSessionSubsystem internal callbacks to these
