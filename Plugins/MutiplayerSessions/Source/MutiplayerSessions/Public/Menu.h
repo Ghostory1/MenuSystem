@@ -42,6 +42,7 @@ private:
 	//메뉴에서 서브시스템 접근
 	class UMultiplayerSessionsSubsystem* MultiplayerSessionsSubsystem;
 
+	//타입 저장
 	int32 NumPublicConnections{ 4 };
 	FString MatchType{ TEXT("FreeForAll") };
 };
