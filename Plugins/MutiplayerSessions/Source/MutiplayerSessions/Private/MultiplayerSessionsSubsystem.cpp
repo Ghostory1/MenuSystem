@@ -48,6 +48,11 @@ void UMultiplayerSessionsSubsystem::CreateSession(int32 NumPublicConnections, FS
 	LastSessionSettings->bUsesPresence = true; // 현재 지역에서 진행중인 세션 찾기위해 true
 	LastSessionSettings->bUseLobbiesIfAvailable = true; // 언리얼5.0버전 이상부터 추가
 	LastSessionSettings->Set(FName("MatchType"),MatchType, EOnlineDataAdvertisementType::ViaOnlineServiceAndPing); //키 값 MatchType,FreeForAll 에 맞아야 같은 세션에 참여하게 세팅
+	//BuildUniqueId = 1 을 세팅하면 유효한게임 세션을 검색할 때 다른 세션을 보고 참가할수있고 오픈 커넥션이 없으면 조인할수없다
+	//Config폴더에서 추가작업 필요 DefaultGame.ini 에서 밑에 코드 추가
+	// [/Script/Engine.GameSession]
+	// MaxPlayers = 100
+	LastSessionSettings->BuildUniqueId = 1; // 여러 사용자가 자체 빌드 및 호스팅을 시작하도록 할 수 있다.
 
 	const ULocalPlayer* LocalPlayer = GetWorld()->GetFirstLocalPlayerFromController();
 	if (!SessionInterface->CreateSession(*LocalPlayer->GetPreferredUniqueNetId(), NAME_GameSession, *LastSessionSettings))
